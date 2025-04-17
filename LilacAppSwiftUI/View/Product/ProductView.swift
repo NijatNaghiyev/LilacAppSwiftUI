@@ -8,23 +8,33 @@
 import SwiftUI
 
 struct ProductView: View {
-    @Environment(\.dismiss) var dismiss
-    
+   
     var body: some View {
         NavigationStack{
-            
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss.callAsFunction()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .foregroundColor(.white)
-                }
-
+            ScrollView{
+                AppBarImage(imageUrl: ProductViewModel.imageUrl)
+                
+                SubTitleView()
+                
+                ParametresCartView()
+                
             }
+            .ignoresSafeArea(.all) //: ScrollView
         }
+        .navigationBarBackButtonHidden(true) //: NavigationStack
+        .enableSwipeBack()
     }
 }
+
+
+
+
+
+#Preview {
+    NavigationStack {
+        ProductView()
+    }
+}
+
+
+

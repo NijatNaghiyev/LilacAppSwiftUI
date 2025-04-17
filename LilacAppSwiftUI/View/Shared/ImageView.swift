@@ -11,12 +11,14 @@ struct ImageView: View {
     let imageUrl: String
     let width: CGFloat?
     let height: CGFloat?
+    let cornerRadius: CGFloat?
     
   
-    init(imageUrl: String, width: CGFloat? = nil, height: CGFloat? = nil) {
+    init(imageUrl: String, width: CGFloat? = nil, height: CGFloat? = nil, cornerRadius: CGFloat? = nil) {
         self.imageUrl = imageUrl
         self.width = width
         self.height = height
+        self.cornerRadius = cornerRadius
     }
     
     
@@ -27,14 +29,14 @@ struct ImageView: View {
                 ProgressView()
                     .frame(width:width ?? 226,  height:height ?? 226)
                     .background(Color.gray.opacity(0.3))
-                    .cornerRadius(16)
+                    .cornerRadius(cornerRadius ?? 16)
             case .success(let image):
                 image
                     .resizable()
                     .scaledToFill()
                     .frame(width:width ?? 226, height: height ?? 226)
                     .clipped()
-                    .cornerRadius(16)
+                    .cornerRadius(cornerRadius ?? 16)
             case .failure:
                 Image(systemName: "photo")
                     .resizable()
@@ -42,7 +44,7 @@ struct ImageView: View {
                     .frame(width:width ?? 226, height:height ?? 226)
                     .foregroundColor(.gray)
                     .background(Color.gray.opacity(0.3))
-                    .cornerRadius(16)
+                    .cornerRadius(cornerRadius ?? 16)
             @unknown default:
                 EmptyView()
             }
